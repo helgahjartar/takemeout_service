@@ -1,0 +1,8 @@
+.DS_STORE
+
+*.log*
+build
+.gradle
+gradle
+gradlew
+gradlew.bat
