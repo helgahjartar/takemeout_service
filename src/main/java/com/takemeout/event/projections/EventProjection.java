@@ -1,40 +1,42 @@
 package com.takemeout.event.projections;
 
-public class EventProjection {
+import java.sql.Date;
+
+public class EventOverviewProjection {
   private int id;
-  private int userId;
   private String name;
-  private String time;
-  private String clock;
-  private String type;
-  private String description;
+  private Date time;
   private String access;
-  private String location;
+  private String typeDescriptionEng;
+  private String typeDescriptionIce;
+  private int typeId;
+  private String locationName;
+  private String address;
 
   public int getId() { return id; }
   public void setId(int id) { this.id = id; }
 
-  public int getUserId() { return userId; }
-  public void setUserId(int userId) { this.userId = userId; }
-
   public String getName() { return name; }
   public void setName(String name) { this.name = name; }
 
-  public String getClock() { return clock; }
-  public void setClock(String clock) { this.clock = clock; }
-
-  public String getTime() { return time; }
-  public void setTime(String time) { this.time = time; }
-
-  public String getType() { return type; }
-  public void setType(String type) { this.type = type; }
-
-  public String getDescription() { return description; }
-  public void setDescription(String description) { this.description = description; }
+  public Date getTime() { return time; }
+  public void setTime(Date time) { this.time = time; }
 
   public String getAccess() {return access; }
   public void setAccess(String access) { this.access = access; }
 
-  public String getLocation() { return location; }
-  public void setLocation(String location) { this.location = location; }
+  public String getTypeDescriptionEng() { return typeDescriptionEng; }
+  public void setTypeDescriptionEng(String typeDescriptionEng) { this.typeDescriptionEng = typeDescriptionEng; }
+
+  public String getTypeDescriptionIce() { return typeDescriptionIce; }
+  public void setTypeDescriptionIce(String typeDescriptionIce) { this.typeDescriptionIce = typeDescriptionIce; }
+
+  public int getTypeId() { return typeId; }
+  public void setTypeId(int typeId) { this.typeId = typeId; }
+
+  public String getLocationName() { return locationName; }
+  public void setLocationName(String locationName) { this.locationName = locationName; }
+
+  public String getAddress() { return address; }
+  public void setAddress(String address) { this.address = address; }
 }

@@ -13,13 +13,13 @@
 
    <!-- Assume tmo is the database name -->
    <property name="hibernate.connection.url">
-      jdbc:mysql://localhost/takemeout_db
+      jdbc:mysql://takemeout.cuguiupiegvl.us-west-2.rds.amazonaws.com:3306/takemeout_db
    </property>
    <property name="hibernate.connection.username">
-      root
+      takemeout_db
    </property>
    <property name="hibernate.connection.password">
-      1234
+      h3lgif3iti
    </property>
 
    <!-- Creates the database schema on startup if it doesn't already exist -->
