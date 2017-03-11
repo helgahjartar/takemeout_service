@@ -1,32 +1,35 @@
 package com.takemeout.event.registration.requests;
 
+import java.sql.Date;
+import java.util.List;
+
 public class RegisterEventRequest {
   private String name;
-  private String time;
-  private String clock;
-  private String type;
-  private String description;
-  private String access;
-  private String location;
+  private String descriptionEng;
+  private String descriptionIce;
+  private Date time;
+  private int typeId;
+  private int locationId;
+  private List<Integer> performerIds;
 
   public String getName() { return name; }
   public void setName(String name) { this.name = name; }
 
-  public String getClock() { return clock; }
-  public void setClock(String clock) { this.clock = clock; }
+  public String getDescriptionEng() { return descriptionEng; }
+  public void setDescriptionEng(String descriptionEng) { this.descriptionEng = descriptionEng; }
 
-  public String getTime() { return time; }
-  public void setTime(String time) { this.time = time; }
+  public String getDescriptionIce() { return descriptionIce; }
+  public void setDescriptionIce(String descriptionIce) { this.descriptionIce = descriptionIce; }
 
-  public String getType() { return type; }
-  public void setType(String type) { this.type = type; }
+  public Date getTime() { return time; }
+  public void setTime(Date time) { this.time = time; }
 
-  public String getDescription() { return description; }
-  public void setDescription(String description) { this.description = description; }
+  public int getTypeId() { return typeId; }
+  public void setTypeId(int typeId) { this.typeId = typeId; }
 
-  public String getAccess() {return access; }
-  public void setAccess(String access) { this.access = access; }
+  public int getLocationId() { return locationId; }
+  public void setLocationId(int locationId) { this.locationId = locationId; }
 
-  public String getLocation() { return location; }
-  public void setLocation(String location) { this.location = location; }
+  public List<Integer> getPerformerIds() { return performerIds; }
+  public void setPerformerIds(List<Integer> performerIds) { this.performerIds = performerIds; }
 }

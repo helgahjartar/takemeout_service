@@ -53,14 +53,18 @@ public class IEventDAOImpl implements IEventDAO {
   }
 
   @Override
-  public void registerEvent(RegisterEventRequest event, int userId) {
+  public void registerEvent(RegisterEventRequest req, int userId) {
     Session session = SessionUtil.getSessionFactory().openSession();
     session.beginTransaction();
 
-    List<Event> events = getRegisteredEvents();
+    User user = (User)session.get(User.class, userId);
+    Type type = (Type)session.get(TypeItem.class, req.getTypeId());
+    Location location = (Location)session.get(Location.class, req.getLocationId());
+    MultiIdentifierLoadAccess<Performer> mla = session.byMultipleIds(Performer.class);
+    List<Performer> performers = multiLoad(req.getPerformerIds());
 
-
-    Event newEvent = new Event(userId, event.getName(), event.getTime(), event.getClock(), event.getType(), event.getDescription(), event.getAccess(), event.getLocation());
+    Event newEvent = new Event( req.getName(), req.getDescriptionEng(), req.getDescriptionIce()
+                              , req.getTime(), user, type, location, performers);
 
     session.save(newEvent);
 
