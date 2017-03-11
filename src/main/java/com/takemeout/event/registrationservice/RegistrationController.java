@@ -14,9 +14,8 @@ import java.util.List;
 import java.io.IOException;
 
 import com.takemeout.event.registrationservice.IEventDAO;
-import com.takemeout.event.entities.Event;
 import com.takemeout.jwt.JwtUtil;
-import com.takemeout.event.projections.EventProjection;
+import com.takemeout.event.projections.EventOverviewProjection;
 import com.takemeout.event.registration.requests.RegisterEventRequest;
 
 @RestController
@@ -26,7 +25,7 @@ public class RegistrationController {
 
   @CrossOrigin
   @RequestMapping(value = "/event/registration", method = RequestMethod.GET)
-  public List<Event> getRegisteredEvents() {
+  public List<EventOverviewProjection> getRegisteredEvents() {
     try {
       return eventDao.getRegisteredEvents();
     } catch(Exception e) {

@@ -11,7 +11,6 @@ import java.util.List;
 
 import com.takemeout.user.requests.LoginRequest;
 import com.takemeout.user.requests.RegisterUserRequest;
-import com.takemeout.user.projections.UserProjection;
 import com.takemeout.user.service.IUserDAOImpl;
 import com.takemeout.user.entities.User;
 import com.takemeout.user.exceptions.UserNameConflictException;

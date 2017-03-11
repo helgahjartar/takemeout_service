@@ -10,7 +10,6 @@ import org.hibernate.Session;
 
 import com.takemeout.util.SessionUtil;
 import com.takemeout.user.exceptions.UserNameConflictException;
-import com.takemeout.user.projections.UserProjection;
 import com.takemeout.user.entities.User;
 import com.takemeout.user.service.IUserDAO;
 import com.takemeout.user.requests.RegisterUserRequest;

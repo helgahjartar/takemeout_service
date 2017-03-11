@@ -1,6 +1,6 @@
 package com.takemeout.event.registrationservice;
 
-import com.takemeout.event.entities.Event;
+import com.takemeout.event.projections.EventOverviewProjection;
 import com.takemeout.event.registration.requests.RegisterEventRequest;
 
 
@@ -11,5 +11,5 @@ public interface IEventDAO {
   boolean isInit();
 
   void registerEvent(RegisterEventRequest req, int userId);
-  List<Event> getRegisteredEvents();
+  List<EventOverviewProjection> getRegisteredEvents();
 }

@@ -27,7 +27,10 @@
 
    <!-- Mapping classes -->
    <mapping class="com.takemeout.event.entities.Event"/>
+   <mapping class="com.takemeout.event.entities.Location"/>
+   <mapping class="com.takemeout.event.entities.Performer"/>
    <mapping class="com.takemeout.user.entities.User"/>
+   <mapping class="com.takemeout.common.TypeItem"/>
 
 
 </session-factory>

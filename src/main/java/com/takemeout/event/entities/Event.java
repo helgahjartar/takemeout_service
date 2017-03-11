@@ -37,7 +37,7 @@ public class Event {
 	@JoinColumn(name = "userId")
   private User user;
   @ManyToOne(fetch = FetchType.EAGER, optional = false)
-  @Column(name = "typeId", nullable = false)
+  @JoinColumn(name = "typeId")
   private TypeItem type;
   @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "locationId")

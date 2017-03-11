@@ -6,7 +6,6 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.takemeout.user.projections.UserProjection;
 import com.takemeout.user.entities.User;
 
 public class JwtUtil {
