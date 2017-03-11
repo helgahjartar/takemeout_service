@@ -20,10 +20,10 @@ import com.takemeout.event.entities.Performer;
 import com.takemeout.event.projections.EventOverviewProjection;
 import com.takemeout.event.registration.requests.RegisterEventRequest;
 
-public class IEventDAOImpl implements IEventDAO {
+public class EventRegistrationDAO implements IEventDAO {
 
-  public static IEventDAO getIEventDao() {
-    return new IEventDAOImpl();
+  public static IEventRegistrationDAO getIEventDao() {
+    return new EventRegistrationDAO();
   }
 
   @Override
@@ -61,9 +61,9 @@ public class IEventDAOImpl implements IEventDAO {
     Session session = SessionUtil.getSessionFactory().openSession();
     session.beginTransaction();
 
-    User user = (User)session.get(User.class, userId);
-    TypeItem type = (TypeItem)session.get(TypeItem.class, req.getTypeId());
-    Location location = (Location)session.get(Location.class, req.getLocationId());
+    User user = session.get(User.class, userId);
+    TypeItem type = session.get(TypeItem.class, req.getTypeId());
+    Location location = session.get(Location.class, req.getLocationId());
     MultiIdentifierLoadAccess<Performer> mla = session.byMultipleIds(Performer.class);
     List<Performer> performers = mla.multiLoad(req.getPerformerIds());
 

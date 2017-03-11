@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.FetchType;
-
 import com.takemeout.user.entities.User;
 
 @Entity
@@ -23,7 +22,6 @@ public class Performer {
   private String descriptionEng;
   @Column(name = "descriptionIce", nullable = false)
   private String descriptionIce;
-
   @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "userId")
   private User user;

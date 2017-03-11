@@ -1,4 +1,4 @@
-package com.takemeout.event.registration.requests;
+package com.takemeout.event.registrationservice.requests;
 
 import java.sql.Date;
 import java.util.List;

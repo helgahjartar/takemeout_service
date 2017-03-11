@@ -1,6 +1,5 @@
 package com.takemeout.event.entities;
 
-import com.takemeout.user.entities.User;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.Entity;
@@ -9,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.JoinColumn;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import com.takemeout.user.entities.User;
 
 @Entity
 @Table(name = "Location")

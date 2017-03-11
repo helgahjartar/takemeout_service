@@ -1,6 +1,6 @@
-package com.takemeout.event.registration.requests;
+package com.takemeout.event.registrationservice.requests;
 
-public class CreateLocationRequest {
+public class RegisterLocationRequest {
   private String name;
   private String address;
   private String access;

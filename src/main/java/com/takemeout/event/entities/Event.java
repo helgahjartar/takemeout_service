@@ -10,11 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-
 import java.lang.IllegalArgumentException;
 import java.sql.Date;
 import java.util.List;
-
 import com.takemeout.user.entities.User;
 import com.takemeout.common.TypeItem;
 
@@ -32,7 +30,6 @@ public class Event {
   private String descriptionIce;
   @Column(name = "time", nullable = false)
   private Date time;
-
   @ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "userId")
   private User user;
@@ -48,17 +45,12 @@ public class Event {
             , inverseJoinColumns = { @JoinColumn(name = "performerId") })
   private List<Performer> performers;
 
-  // todo: Refactor, stop using time and clock and find proper class to store time
-  // todo: Stop using strings everywhere and define classes to wrap info
-
   public Event( String name, String descriptionEng, String descriptionIce, Date time
               , User user, TypeItem type, Location location, List<Performer> performers) {
-
     if (name == null || name.equals("")) throw new IllegalArgumentException("name can't be null or empty");
     if (descriptionEng == null || descriptionEng.equals("")) throw new IllegalArgumentException("English description can't be null or empty");
     if (descriptionIce == null || descriptionIce.equals("")) throw new IllegalArgumentException("Icelandic description can't be null or empty");
     if (time == null) throw new IllegalArgumentException("time can't be null");
-
     if (user == null) throw new IllegalArgumentException("user can't be null");
     if (type == null) throw new IllegalArgumentException("type can't be null");
     if (location == null) throw new IllegalArgumentException("location can't be null");
@@ -68,7 +60,6 @@ public class Event {
     this.descriptionEng = descriptionEng;
     this.descriptionIce = descriptionIce;
     this.time = time;
-
     this.user = user;
     this.type = type;
     this.location = location;
@@ -80,7 +71,6 @@ public class Event {
   public String getDescriptionEng() { return descriptionEng; }
   public String getDescriptionIce() { return descriptionIce; }
   public Date getTime() { return time; }
-
   public User getUser() { return user; }
   public TypeItem getType() { return type; }
   public Location getLocation() { return location; }
