@@ -1,6 +1,5 @@
 package com.takemeout.event.entities;
 
-import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.Column;
@@ -11,17 +10,12 @@ import javax.persistence.ManyToOne;
 import com.takemeout.user.entities.User;
 
 @Entity
-@Table(name = "Location")
 public class Location {
   @Id @GeneratedValue
-  @Column(name = "id", nullable = false)
-  private int id;
-  @Column(name = "name", nullable = false)
-  private String name;
-  @Column(name = "address", nullable = false)
-  private String address;
-  @Column(name = "access", nullable = false)
-  private String access;
+  @Column(nullable = false) private int id;
+  @Column(nullable = false) private String name;
+  @Column(nullable = false) private String address;
+  @Column(nullable = false) private String access;
   @ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "userId")
   private User user;

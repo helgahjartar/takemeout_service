@@ -11,7 +11,7 @@ import java.util.List;
 
 import com.takemeout.user.requests.LoginRequest;
 import com.takemeout.user.requests.RegisterUserRequest;
-import com.takemeout.user.service.IUserDAOImpl;
+import com.takemeout.user.service.UserDAO;
 import com.takemeout.user.entities.User;
 import com.takemeout.user.exceptions.UserNameConflictException;
 import com.takemeout.jwt.JwtUtil;
@@ -22,7 +22,7 @@ public class AuthenticationController {
   IUserDAO userHandler = null;
 
   public AuthenticationController () {
-    userHandler = IUserDAOImpl.getIUserDao();
+    userHandler = UserDAO.getIUserDao();
   }
 
 

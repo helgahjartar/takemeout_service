@@ -1,6 +1,5 @@
 package com.takemeout.event.entities;
 
-import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.Column;
@@ -11,17 +10,12 @@ import javax.persistence.FetchType;
 import com.takemeout.user.entities.User;
 
 @Entity
-@Table(name = "Performer")
 public class Performer {
   @Id @GeneratedValue
-  @Column(name = "id", nullable = false)
-  private int id;
-  @Column(name = "name", nullable = false)
-  private String name;
-  @Column(name = "descriptionEng", nullable = false)
-  private String descriptionEng;
-  @Column(name = "descriptionIce", nullable = false)
-  private String descriptionIce;
+  @Column(nullable = false) private int id;
+  @Column(nullable = false) private String name;
+  @Column(nullable = false) private String descriptionEng;
+  @Column(nullable = false) private String descriptionIce;
   @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "userId")
   private User user;
@@ -37,4 +31,10 @@ public class Performer {
     this.descriptionIce = descriptionIce;
     this.user = user;
   }
+
+  public int getId() { return id; }
+  public String getName() { return name; }
+  public String getDescriptionEng() { return descriptionEng; }
+  public String getDescriptionIce() { return descriptionIce; }
+  public User getUser() { return user; }
 }

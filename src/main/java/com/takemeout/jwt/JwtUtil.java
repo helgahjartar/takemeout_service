@@ -20,21 +20,16 @@ public class JwtUtil {
      * @param token the JWT token to parse
      * @return the User object extracted from specified token or null if a token is invalid.
      */
-    public static User parseToken(String token) throws JwtException {
+    public static int parseToken(String token) throws JwtException {
         try {
             Claims body = Jwts.parser()
                     .setSigningKey(secret)
                     .parseClaimsJws(token)
                     .getBody();
 
-            User u = new User();
-            u.setUserName(body.getSubject());
-            u.setId(Integer.parseInt((String) body.get("userId")));
-
-            return u;
-
+            return Integer.parseInt((String) body.get("userId"));
         } catch (ClassCastException e) {
-            return null;
+            return -1;
         }
     }
 

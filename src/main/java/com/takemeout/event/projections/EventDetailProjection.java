@@ -1,20 +1,31 @@
 package com.takemeout.event.projections;
 
+import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.ManyToMany;
+import javax.persistence.FetchType;
+import org.hibernate.annotations.Immutable;
 import java.sql.Date;
 import java.util.List;
 
+@Entity
+@Immutable
 public class EventDetailProjection {
-  private int id;
-  private String name;
-  private String descriptionEng;
-  private String descriptionIce;
-  private Date time;
-  private String access;
-  private String typeDescriptionEng;
-  private String typeDescriptionIce;
-  private String locationName;
-  private String address;
-  private List<String> performerNames;
+  @Id @GeneratedValue
+	@Column(nullable = false) private int id;
+  @Column(nullable = false) private String name;
+  @Column(nullable = false) private String descriptionEng;
+  @Column(nullable = false) private String descriptionIce;
+  @Column(nullable = false) private Date time;
+  @Column(nullable = false) private String typeDescriptionEng;
+  @Column(nullable = false) private String typeDescriptionIce;
+  @Column(nullable = false) private String locationName;
+  @Column(nullable = false) private String address;
+  @Column(nullable = false) private String access;
+  @ManyToMany(fetch = FetchType.EAGER, mappedBy = "Event")
+  @Column(name = "eventId") private List<String> performerNames;
 
   public int getId() { return id; }
   public void setId(int id) { this.id = id; }
@@ -31,9 +42,6 @@ public class EventDetailProjection {
   public Date getTime() { return time; }
   public void setTime(Date time) { this.time = time; }
 
-  public String getAccess() {return access; }
-  public void setAccess(String access) { this.access = access; }
-
   public String getTypeDescriptionEng() { return typeDescriptionEng; }
   public void setTypeDescriptionEng(String typeDescriptionEng) { this.typeDescriptionEng = typeDescriptionEng; }
 
@@ -45,6 +53,9 @@ public class EventDetailProjection {
 
   public String getAddress() { return address; }
   public void setAddress(String address) { this.address = address; }
+
+  public String getAccess() {return access; }
+  public void setAccess(String access) { this.access = access; }
 
   public List<String> getPerformerNames() { return performerNames; }
   public void setPerformerNames(List<String> performerNames) { this.performerNames = performerNames; }

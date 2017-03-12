@@ -1,10 +1,19 @@
 package com.takemeout.event.projections;
 
+import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import org.hibernate.annotations.Immutable;
+
+@Entity
+@Immutable
 public class PerformerProjection {
-  private int id;
-  private String name;
-  private String descriptionEng;
-  private String descriptionIce;
+  @Id @GeneratedValue
+  @Column(nullable = false) private int id;
+  @Column(nullable = false) private String name;
+  @Column(nullable = false) private String descriptionEng;
+  @Column(nullable = false) private String descriptionIce;
 
   public int getId() { return id; }
   public void setId(int id) { this.id = id; }

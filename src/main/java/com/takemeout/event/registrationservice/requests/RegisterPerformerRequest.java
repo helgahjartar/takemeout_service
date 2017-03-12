@@ -1,6 +1,6 @@
 package com.takemeout.event.registrationservice.requests;
 
-public class CreatePerformerRequest {
+public class RegisterPerformerRequest {
   private String name;
   private String descriptionEng;
   private String descriptionIce;

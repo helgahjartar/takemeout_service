@@ -8,9 +8,7 @@ import java.util.List;
 
 
 public interface IUserDAO {
-
   User getUser(String userName);
   List<User> getUsers();
   void saveUser(RegisterUserRequest user) throws UserNameConflictException;
-
 }

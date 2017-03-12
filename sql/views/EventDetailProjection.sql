@@ -1,9 +1,10 @@
-create view EventOverviewProjection
+create view EventDetailProjection
 ( id
 , name
+, descriptionEng
+, descriptionIce
 , time
 -- joined columns
-, typeId
 , typeDescriptionEng
 , typeDescriptionIce
 , locationName
@@ -13,9 +14,10 @@ create view EventOverviewProjection
 as select
   e.id
 , e.name
+, e.descriptionEng
+, e.descriptionIce
 , e.time
 
-, t.id
 , t.descriptionEng
 , t.descriptionIce
 , l.name

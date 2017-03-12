@@ -15,10 +15,10 @@ import com.takemeout.user.service.IUserDAO;
 import com.takemeout.user.requests.RegisterUserRequest;
 
 
-public class IUserDAOImpl implements IUserDAO {
+public class UserDAO implements IUserDAO {
 
   public static IUserDAO getIUserDao() {
-    return new IUserDAOImpl();
+    return new UserDAO();
   }
 
   public User getUser(String userName) {
