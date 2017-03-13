@@ -9,53 +9,41 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import java.util.List;
 import java.io.File;
 import java.io.IOException;
+import com.takemeout.common.BaseDAO;
 import com.takemeout.util.SessionUtil;
 import com.takemeout.event.projections.*;
 import com.takemeout.common.TypeItem;
 
 @Component("EventQueryDAO")
-public class EventQueryDAO implements IEventQueryDAO {
-
-  @Override
-  public boolean isInit() {
-    return hasEventOverviewProjection();
-  }
-
-  @SuppressWarnings("unchecked")
-  private boolean hasEventOverviewProjection() {
-    Session session =  SessionUtil.getSessionFactory().openSession();
-    session.beginTransaction();
-    List<EventOverviewProjection> events = session.createQuery("from EventOverviewProjection e").setMaxResults(1).list();
-    session.flush();
-    session.getTransaction().commit();
-    session.close();
-    return !events.isEmpty();
-  }
+public class EventQueryDAO extends BaseDAO implements IEventQueryDAO {
 
   public EventDetailProjection getEventDetails(int eventId) {
-    Session session = SessionUtil.getSessionFactory().openSession();
-
-    EventDetailProjection event = session.get(EventDetailProjection.class, eventId);
-
-    session.flush();
-    session.close();
-
-    return event;
+    return executeR((session) -> {
+      return session.get(EventDetailProjection.class, eventId);
+    });
   }
 
   public List<EventOverviewProjection> getEvents() {
-    return null;
+    return executeR((session) -> {
+      return null;
+    });
   }
 
   public List<LocationProjection> getLocations() {
-    return null;
+    return executeR((session) -> {
+      return null;
+    });
   }
 
   public List<PerformerProjection> getPerformer() {
-    return null;
+    return executeR((session) -> {
+      return null;
+    });
   }
 
   public List<TypeItem> getTypes() {
-    return null;
+    return executeR((session) -> {
+      return null;
+    });
   }
 }

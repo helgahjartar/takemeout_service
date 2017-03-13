@@ -5,9 +5,6 @@ import com.takemeout.event.registrationservice.requests.*;
 import java.util.List;
 
 public interface IEventRegistrationDAO {
-
-  boolean isInit();
-
   List<EventOverviewProjection> getRegisteredEvents(int userId);
   void registerEvent(RegisterEventRequest req, int userId);
   void registerLocation(RegisterLocationRequest req, int userId);

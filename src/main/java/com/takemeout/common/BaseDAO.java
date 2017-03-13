@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import com.takemeout.util.SessionUtil;
 
 public class BaseDAO {
-  public void inTransaction(Consumer<Session> r) {
+  public void execute(Consumer<Session> r) {
     Session session = SessionUtil.getSession();
     try {
       session.beginTransaction();
@@ -19,7 +19,7 @@ public class BaseDAO {
     }
   }
 
-  public <R> R inTransactionR(Function<Session, R> r) {
+  public <R> R executeR(Function<Session, R> r) {
     Session session = SessionUtil.getSession();
     try {
       session.beginTransaction();

@@ -5,9 +5,6 @@ import com.takemeout.common.TypeItem;
 import java.util.List;
 
 public interface IEventQueryDAO {
-
-  boolean isInit();
-
   EventDetailProjection getEventDetails(int eventId);
   List<EventOverviewProjection> getEvents();
   List<LocationProjection> getLocations();

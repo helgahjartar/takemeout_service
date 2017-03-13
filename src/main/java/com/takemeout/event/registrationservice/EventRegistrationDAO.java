@@ -20,28 +20,14 @@ import com.takemeout.event.registrationservice.requests.*;
 @Component("EventRegistrationDAO")
 public class EventRegistrationDAO extends BaseDAO implements IEventRegistrationDAO {
 
-  @Override
-  public boolean isInit() {
-    return hasEventTable();
-  }
-
-  private boolean hasEventTable() {
-    List<Event> events = inTransactionR((session) -> {
-      return session.createQuery("from Event e", Event.class).setMaxResults(1).list();
-    });
-    return !events.isEmpty();
-  }
-
-  @Override
   public List<EventOverviewProjection> getRegisteredEvents(int userId) {
-    return inTransactionR((session) -> {
-      return session.createQuery("from EventOverviewProjection", EventOverviewProjection.class).list();
-    }
+    return executeR((session) -> {
+      return null;
+    });
   }
 
-  @Override
   public void registerEvent(RegisterEventRequest req, int userId) {
-    inTransaction((session) -> {
+    execute((session) -> {
       User user = session.get(User.class, userId);
       TypeItem type = session.get(TypeItem.class, req.getTypeId());
       Location location = session.get(Location.class, req.getLocationId());
@@ -54,18 +40,16 @@ public class EventRegistrationDAO extends BaseDAO implements IEventRegistrationD
     });
   }
 
-  @Override
   public void registerLocation(RegisterLocationRequest req, int userId) {
-    inTransaction((session) -> {
+    execute((session) -> {
       User user = session.get(User.class, userId);
       Location newLocation = new Location(req.getName(), req.getAddress(), req.getAccess(), user);
       session.save(newLocation);
     });
   }
 
-  @Override
   public void registerPerformer(RegisterPerformerRequest req, int userId) {
-    inTransaction((session) -> {
+    execute((session) -> {
       User user = session.get(User.class, userId);
       Performer newPerformer = new Performer( req.getName(), req.getDescriptionEng()
                                             , req.getDescriptionIce(), user);
