@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import javax.servlet.http.HttpServletResponse;
 import io.jsonwebtoken.JwtException;
 import java.util.List;
@@ -18,17 +20,25 @@ import com.takemeout.event.registrationservice.requests.*;
 @RestController
 public class RegistrationController {
 
-  IEventRegistrationDAO eventDao = EventRegistrationDAO.getIEventRegistrationDAO();
+  private IEventRegistrationDAO eventRegHandler;
+  private JwtUtil jwtHandler;
+
+  @Autowired
+  public RegistrationController(@Qualifier("EventRegistrationDAO") IEventRegistrationDAO eventRegDAO,
+                                @Qualifier("JwtUtil") JwtUtil jwtUtil) {
+    eventRegHandler = eventRegDAO;
+    jwtHandler = jwtUtil;
+  }
 
   @CrossOrigin
   @RequestMapping(value = "/event/registration/event", method = RequestMethod.GET)
   public List<EventOverviewProjection> getRegisteredEvents(@RequestHeader(value="token") String token,
                                                            HttpServletResponse res) {
     try {
-      return eventDao.getRegisteredEvents(JwtUtil.parseToken(token));
+      return eventRegHandler.getRegisteredEvents(jwtHandler.parseToken(token));
     } catch(JwtException e) {
       System.out.println("Access token is invalid\n"+e.getMessage());
-      res.setStatus(res.SC_UNAUTHORIZED, "Access token is invalid\n"+e.getMessage());
+      res.setStatus(HttpServletResponse.SC_UNAUTHORIZED, "Access token is invalid\n"+e.getMessage());
       return null;
     }
   }
@@ -39,10 +49,10 @@ public class RegistrationController {
                             @RequestBody RegisterEventRequest req,
                             HttpServletResponse res) {
     try {
-      eventDao.registerEvent(req, JwtUtil.parseToken(token));
+      eventRegHandler.registerEvent(req, jwtHandler.parseToken(token));
     } catch(JwtException e) {
       System.out.println("Access token is invalid\n"+e.getMessage());
-      res.setStatus(res.SC_UNAUTHORIZED, "Access token is invalid\n"+e.getMessage());
+      res.setStatus(HttpServletResponse.SC_UNAUTHORIZED, "Access token is invalid\n"+e.getMessage());
     }
   }
 
@@ -52,10 +62,10 @@ public class RegistrationController {
                                @RequestBody RegisterLocationRequest req,
                                HttpServletResponse res) {
     try {
-      eventDao.registerLocation(req, JwtUtil.parseToken(token));
+      eventRegHandler.registerLocation(req, jwtHandler.parseToken(token));
     } catch(JwtException e) {
       System.out.println("Access token is invalid\n"+e.getMessage());
-      res.setStatus(res.SC_UNAUTHORIZED, "Access token is invalid\n"+e.getMessage());
+      res.setStatus(HttpServletResponse.SC_UNAUTHORIZED, "Access token is invalid\n"+e.getMessage());
     }
   }
 
@@ -65,10 +75,10 @@ public class RegistrationController {
                                 @RequestBody RegisterPerformerRequest req,
                                 HttpServletResponse res) {
     try {
-      eventDao.registerPerformer(req, JwtUtil.parseToken(token));
+      eventRegHandler.registerPerformer(req, jwtHandler.parseToken(token));
     } catch(JwtException e) {
       System.out.println("Access token is invalid\n"+e.getMessage());
-      res.setStatus(res.SC_UNAUTHORIZED, "Access token is invalid\n"+e.getMessage());
+      res.setStatus(HttpServletResponse.SC_UNAUTHORIZED, "Access token is invalid\n"+e.getMessage());
     }
   }
 }

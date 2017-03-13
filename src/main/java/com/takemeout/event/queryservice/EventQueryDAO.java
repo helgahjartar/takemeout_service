@@ -1,8 +1,9 @@
 package com.takemeout.event.queryservice;
 
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.MultiIdentifierLoadAccess;
+import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import java.util.List;
@@ -12,21 +13,18 @@ import com.takemeout.util.SessionUtil;
 import com.takemeout.event.projections.*;
 import com.takemeout.common.TypeItem;
 
+@Component("EventQueryDAO")
 public class EventQueryDAO implements IEventQueryDAO {
-
-  public static IEventQueryDAO getIEventQueryDAO() {
-    return new EventQueryDAO();
-  }
 
   @Override
   public boolean isInit() {
     return hasEventOverviewProjection();
   }
 
+  @SuppressWarnings("unchecked")
   private boolean hasEventOverviewProjection() {
     Session session =  SessionUtil.getSessionFactory().openSession();
     session.beginTransaction();
-
     List<EventOverviewProjection> events = session.createQuery("from EventOverviewProjection e").setMaxResults(1).list();
     session.flush();
     session.getTransaction().commit();

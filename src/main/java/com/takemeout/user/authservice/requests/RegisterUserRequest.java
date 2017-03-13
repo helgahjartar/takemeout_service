@@ -1,4 +1,4 @@
-package com.takemeout.user.requests;
+package com.takemeout.user.authservice.requests;
 
 public class RegisterUserRequest {
   private String userName;

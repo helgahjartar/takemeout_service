@@ -20,6 +20,10 @@ repositories {
     mavenCentral()
 }
 
+tasks.withType(JavaCompile) {
+  options.compilerArgs << "-Xlint"
+}
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 

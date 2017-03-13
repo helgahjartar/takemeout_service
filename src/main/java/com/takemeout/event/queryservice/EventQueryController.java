@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import com.takemeout.event.projections.*;
 import com.takemeout.common.TypeItem;
 import java.util.List;
@@ -14,7 +16,12 @@ import java.util.List;
 @RestController
 public class EventQueryController {
 
-  IEventQueryDAO eventDao = EventQueryDAO.getIEventQueryDAO();
+  private IEventQueryDAO eventQueryHandler;
+
+  @Autowired
+  public EventQueryController(@Qualifier("EventQueryDAO") IEventQueryDAO handler) {
+    eventQueryHandler = handler;
+  }
 
   @CrossOrigin
   @RequestMapping(value = "event/query/details", method=RequestMethod.GET)

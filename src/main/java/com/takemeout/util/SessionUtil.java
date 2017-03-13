@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.InputStream;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -30,7 +31,7 @@ public class SessionUtil {
 
       return factory;
     } catch (Throwable ex) {
-        System.err.println("Error initializing SessionFactory creation. " + ex);
+        System.err.println("Error initializing SessionFactory creation.\n" + ex);
         throw new ExceptionInInitializerError(ex);
     }
   }
@@ -40,5 +41,12 @@ public class SessionUtil {
       sessionFactory = buildSessionFactory();
     }
     return sessionFactory;
+  }
+
+  public static Session getSession() {
+    if (sessionFactory == null) {
+      sessionFactory = buildSessionFactory();
+    }
+    return sessionFactory.openSession();
   }
 }
