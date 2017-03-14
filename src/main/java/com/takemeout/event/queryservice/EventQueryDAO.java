@@ -1,18 +1,13 @@
 package com.takemeout.event.queryservice;
 
-import org.hibernate.query.Query;
-import org.hibernate.Session;
-import org.hibernate.MultiIdentifierLoadAccess;
 import org.springframework.stereotype.Component;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.TypeFactory;
-import java.util.List;
-import java.io.File;
-import java.io.IOException;
+import org.hibernate.MultiIdentifierLoadAccess;
+import org.hibernate.Session;
 import com.takemeout.common.BaseDAO;
 import com.takemeout.util.SessionUtil;
 import com.takemeout.event.projections.*;
 import com.takemeout.common.TypeItem;
+import java.util.List;
 
 @Component("EventQueryDAO")
 public class EventQueryDAO extends BaseDAO implements IEventQueryDAO {
@@ -25,25 +20,30 @@ public class EventQueryDAO extends BaseDAO implements IEventQueryDAO {
 
   public List<EventOverviewProjection> getEvents() {
     return executeR((session) -> {
-      return null;
+      return session.createQuery("from EventOverviewProjection where time >= current_date"
+                                ,EventOverviewProjection.class)
+                    .getResultList();
     });
   }
 
   public List<LocationProjection> getLocations() {
     return executeR((session) -> {
-      return null;
+      return session.createQuery("FROM LocationProjection", LocationProjection.class)
+                    .getResultList();
     });
   }
 
-  public List<PerformerProjection> getPerformer() {
+  public List<PerformerProjection> getPerformers() {
     return executeR((session) -> {
-      return null;
+      return session.createQuery("FROM PerformerProjection", PerformerProjection.class)
+                    .getResultList();
     });
   }
 
   public List<TypeItem> getTypes() {
     return executeR((session) -> {
-      return null;
+      return session.createQuery("FROM TypeItem", TypeItem.class)
+                    .getResultList();
     });
   }
 }

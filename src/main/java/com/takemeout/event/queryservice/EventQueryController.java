@@ -26,30 +26,30 @@ public class EventQueryController {
   @CrossOrigin
   @RequestMapping(value = "event/query/details", method=RequestMethod.GET)
   public EventDetailProjection getEventDetails(@RequestParam(value="eventId") int eventId) {
-    return null;
+      return eventQueryHandler.getEventDetails(eventId);
   }
 
   @CrossOrigin
   @RequestMapping(value = "event/query/events", method=RequestMethod.GET)
   public List<EventOverviewProjection> getEvents() {
-    return null;
+    return eventQueryHandler.getEvents();
   }
 
   @CrossOrigin
   @RequestMapping(value = "event/query/locations", method=RequestMethod.GET)
   public List<LocationProjection> getLocations() {
-    return null;
+    return eventQueryHandler.getLocations();
   }
 
   @CrossOrigin
   @RequestMapping(value = "event/query/performers", method=RequestMethod.GET)
   public List<PerformerProjection> getPerformers() {
-    return null;
+    return eventQueryHandler.getPerformers();
   }
 
   @CrossOrigin
   @RequestMapping(value = "event/query/types", method=RequestMethod.GET)
   public List<TypeItem> getTypes() {
-    return null;
+    return eventQueryHandler.getTypes();
   }
 }

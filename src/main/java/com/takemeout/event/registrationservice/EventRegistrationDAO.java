@@ -1,15 +1,11 @@
 package com.takemeout.event.registrationservice;
 
-import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.MultiIdentifierLoadAccess;
 import org.springframework.stereotype.Component;
 import java.util.List;
-import java.io.File;
-import java.io.IOException;
-import com.takemeout.util.SessionUtil;
-import com.takemeout.common.TypeItem;
 import com.takemeout.common.BaseDAO;
+import com.takemeout.common.TypeItem;
 import com.takemeout.user.entities.User;
 import com.takemeout.event.entities.Event;
 import com.takemeout.event.entities.Location;
@@ -22,7 +18,8 @@ public class EventRegistrationDAO extends BaseDAO implements IEventRegistrationD
 
   public List<EventOverviewProjection> getRegisteredEvents(int userId) {
     return executeR((session) -> {
-      return null;
+      return session.createQuery("from EventOverviewProjection userId = :userId",EventOverviewProjection.class)
+                    .getResultList();
     });
   }
 

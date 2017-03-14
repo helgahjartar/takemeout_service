@@ -8,12 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Autowired;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-import com.takemeout.user.authservice.requests.*;
+import com.takemeout.user.exceptions.AuthenticationFailedException;
 import com.takemeout.user.entities.User;
-import com.takemeout.user.exceptions.UserNameConflictException;
+import com.takemeout.user.authservice.requests.*;
 import com.takemeout.jwt.JwtUtil;
+import java.util.List;
 
 @RestController
 public class AuthenticationController {
@@ -30,29 +29,16 @@ public class AuthenticationController {
 
   @CrossOrigin
   @RequestMapping(value = "user/login", method = RequestMethod.POST, consumes = {"application/json;charset=UTF-8"})
-  public String login(@RequestBody LoginRequest req, HttpServletResponse res) {
-      try {
-        User user = userHandler.getUser(req.getUserName());
-        if (user == null || !user.getPasswordHash().equals(req.getPasswordHash())) {
-          res.setStatus(HttpServletResponse.SC_UNAUTHORIZED, "Username and password combination does not exist");
-          return null;
-        }
-        return jwtHandler.generateToken(user);
-      } catch(Exception e) {
-        res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR , "The request could not be completed be");
-        return null;
-      }
+  public String login(@RequestBody LoginRequest req) throws AuthenticationFailedException {
+    User user = userHandler.getUser(req.getUserName());
+    if (user == null || !user.getPasswordHash().equals(req.getPasswordHash()))
+      throw new AuthenticationFailedException();
+    return jwtHandler.generateToken(user);
   }
 
   @CrossOrigin
   @RequestMapping(value = "user/register", method = RequestMethod.POST,  consumes = {"application/json;charset=UTF-8"})
-  public void registerUser(@RequestBody RegisterUserRequest user, HttpServletResponse res) {
-    try {
-      userHandler.saveUser(user);
-    } catch(UserNameConflictException e) {
-      res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR , e.getMessage());
-    } catch(Exception e) {
-      res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR , "The request could not be completed");
-    }
+  public void registerUser(@RequestBody RegisterUserRequest user) {
+    userHandler.saveUser(user);
   }
 }

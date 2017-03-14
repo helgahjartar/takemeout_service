@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 public class User {
   @Id @GeneratedValue
   @Column(nullable = false) private int id;
-  @Column(nullable = false) private String userName;
+  @Column(nullable = false, unique = true) private String userName;
   @Column(nullable = false) private String passwordHash;
   @Column(nullable = false) private String email;
 

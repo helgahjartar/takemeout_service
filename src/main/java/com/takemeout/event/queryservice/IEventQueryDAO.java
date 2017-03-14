@@ -8,6 +8,6 @@ public interface IEventQueryDAO {
   EventDetailProjection getEventDetails(int eventId);
   List<EventOverviewProjection> getEvents();
   List<LocationProjection> getLocations();
-  List<PerformerProjection> getPerformer();
+  List<PerformerProjection> getPerformers();
   List<TypeItem> getTypes();
 }

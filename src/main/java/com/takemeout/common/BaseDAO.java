@@ -14,6 +14,7 @@ public class BaseDAO {
       session.getTransaction().commit();
     } catch(Exception e) {
       session.getTransaction().rollback();
+      throw e;
     } finally  {
       session.close();
     }
@@ -28,7 +29,7 @@ public class BaseDAO {
       return result;
     } catch(Exception e) {
       session.getTransaction().rollback();
-      return null;
+      throw e;
     } finally  {
       session.close();
     }

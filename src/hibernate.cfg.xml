@@ -3,14 +3,13 @@
 "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
-   <session-factory>
+ <session-factory>
    <property name="hibernate.dialect">
       org.hibernate.dialect.MySQLDialect
    </property>
    <property name="hibernate.connection.driver_class">
       com.mysql.jdbc.Driver
    </property>
-
    <!-- Assume tmo is the database name -->
    <property name="hibernate.connection.url">
       jdbc:mysql://takemeout.cuguiupiegvl.us-west-2.rds.amazonaws.com:3306/takemeout_db
@@ -21,17 +20,13 @@
    <property name="hibernate.connection.password">
       h3lgif3iti
    </property>
-
    <!-- Creates the database schema on startup if it doesn't already exist -->
    <property name="hibernate.hbm2ddl.auto">update</property>
-
    <!-- Mapping classes -->
    <mapping class="com.takemeout.event.entities.Event"/>
    <mapping class="com.takemeout.event.entities.Location"/>
    <mapping class="com.takemeout.event.entities.Performer"/>
    <mapping class="com.takemeout.user.entities.User"/>
    <mapping class="com.takemeout.common.TypeItem"/>
-
-
-</session-factory>
+ </session-factory>
 </hibernate-configuration>
