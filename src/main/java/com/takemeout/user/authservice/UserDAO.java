@@ -11,7 +11,9 @@ public class UserDAO extends BaseDAO implements IUserDAO {
 
   public User getUser(String userName) {
     return executeR(session -> {
-      return session.createQuery("from User u where userName = :userName", User.class).uniqueResult();
+      return session.createQuery("from User u where u.userName = :name", User.class)
+                    .setParameter("name",userName)
+                    .uniqueResult();
     });
   }
 

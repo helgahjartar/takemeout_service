@@ -28,16 +28,18 @@ public class AuthenticationController {
   }
 
   @CrossOrigin
-  @RequestMapping(value = "user/login", method = RequestMethod.POST, consumes = {"application/json;charset=UTF-8"})
+  @RequestMapping(value = "user/auth/login", method = RequestMethod.POST, consumes = {"application/json;charset=UTF-8"})
   public String login(@RequestBody LoginRequest req) throws AuthenticationFailedException {
+    System.out.println("\nusername: "+req.getUserName()+"\npasswordhash: "+req.getPasswordHash()+"\n");
     User user = userHandler.getUser(req.getUserName());
+    System.out.println("Actual username: "+user.getUserName()+"\nActual passwordhash: "+user.getPasswordHash()+"\n");
     if (user == null || !user.getPasswordHash().equals(req.getPasswordHash()))
       throw new AuthenticationFailedException();
     return jwtHandler.generateToken(user);
   }
 
   @CrossOrigin
-  @RequestMapping(value = "user/register", method = RequestMethod.POST,  consumes = {"application/json;charset=UTF-8"})
+  @RequestMapping(value = "user/auth/register", method = RequestMethod.POST,  consumes = {"application/json;charset=UTF-8"})
   public void registerUser(@RequestBody RegisterUserRequest user) {
     userHandler.saveUser(user);
   }

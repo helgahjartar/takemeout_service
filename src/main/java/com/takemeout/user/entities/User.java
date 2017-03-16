@@ -14,6 +14,8 @@ public class User {
   @Column(nullable = false) private String passwordHash;
   @Column(nullable = false) private String email;
 
+  private User() {}
+
   public User(String userName, String passwordHash, String email) {
     this.userName = userName;
     this.passwordHash = passwordHash;

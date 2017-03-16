@@ -24,8 +24,7 @@ public class EventDetailProjection {
   @Column(nullable = false) private String locationName;
   @Column(nullable = false) private String address;
   @Column(nullable = false) private String access;
-  @ManyToMany(fetch = FetchType.EAGER, mappedBy = "Event")
-  @Column(name = "eventId") private List<String> performerNames;
+//  @Column(name = "eventId") private List<String> performerNames;
 
   public int getId() { return id; }
   public void setId(int id) { this.id = id; }
@@ -57,6 +56,6 @@ public class EventDetailProjection {
   public String getAccess() {return access; }
   public void setAccess(String access) { this.access = access; }
 
-  public List<String> getPerformerNames() { return performerNames; }
-  public void setPerformerNames(List<String> performerNames) { this.performerNames = performerNames; }
+//  public List<String> getPerformerNames() { return performerNames; }
+//  public void setPerformerNames(List<String> performerNames) { this.performerNames = performerNames; }
 }

@@ -28,5 +28,10 @@
    <mapping class="com.takemeout.event.entities.Performer"/>
    <mapping class="com.takemeout.user.entities.User"/>
    <mapping class="com.takemeout.common.TypeItem"/>
+
+   <mapping class="com.takemeout.event.projections.EventOverviewProjection" />
+   <mapping class="com.takemeout.event.projections.EventDetailProjection" />
+   <mapping class="com.takemeout.event.projections.LocationProjection" />
+   <mapping class="com.takemeout.event.projections.PerformerProjection" />
  </session-factory>
 </hibernate-configuration>

@@ -20,7 +20,7 @@ public class EventQueryDAO extends BaseDAO implements IEventQueryDAO {
 
   public List<EventOverviewProjection> getEvents() {
     return executeR((session) -> {
-      return session.createQuery("from EventOverviewProjection where time >= current_date"
+      return session.createQuery("from EventOverviewProjection" //where time >= current_date
                                 ,EventOverviewProjection.class)
                     .getResultList();
     });

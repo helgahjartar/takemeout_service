@@ -38,6 +38,8 @@ public class Event {
             , inverseJoinColumns = { @JoinColumn(name = "performerId") })
   private List<Performer> performers;
 
+  private Event() {}
+
   public Event( String name, String descriptionEng, String descriptionIce, Date time
               , User user, TypeItem type, Location location, List<Performer> performers) {
     if (name == null || name.equals("")) throw new IllegalArgumentException("name can't be null or empty");

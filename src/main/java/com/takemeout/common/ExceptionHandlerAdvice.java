@@ -12,6 +12,8 @@ public class ExceptionHandlerAdvice{
 
   @ExceptionHandler(value = Exception.class)
   public ResponseEntity<?> defaultHandleException(Exception e) {
+    System.out.println(e);
+    e.printStackTrace();
     return ResponseEntity
               .status(HttpStatus.INTERNAL_SERVER_ERROR)
               .body("Couldn't complete the requests because of the following error\n"
@@ -20,6 +22,8 @@ public class ExceptionHandlerAdvice{
 
   @ExceptionHandler(value = JwtException.class)
   public ResponseEntity<?> handleJwtException(JwtException e) {
+    System.out.println(e);
+    e.printStackTrace();
     return ResponseEntity
               .status(HttpStatus.UNAUTHORIZED)
               .body("Access token is invalid\n"+e.getMessage());
@@ -27,6 +31,8 @@ public class ExceptionHandlerAdvice{
 
   @ExceptionHandler(value = AuthenticationFailedException.class)
   public ResponseEntity<?> handleJwtException(AuthenticationFailedException e) {
+    System.out.println(e);
+    e.printStackTrace();
     return ResponseEntity
               .status(HttpStatus.UNAUTHORIZED)
               .body(e.getMessage());

@@ -20,6 +20,8 @@ public class Location {
 	@JoinColumn(name = "userId")
   private User user;
 
+  private Location() {}
+
   public Location(String name, String address, String access, User user) {
     if (name == null || name.equals("")) throw new IllegalArgumentException("name can't be null or empty");
     if (address == null || address.equals("")) throw new IllegalArgumentException("address can't be null or empty");

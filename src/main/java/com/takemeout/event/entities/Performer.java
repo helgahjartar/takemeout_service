@@ -20,6 +20,8 @@ public class Performer {
   @JoinColumn(name = "userId")
   private User user;
 
+  private Performer() {}
+
   public Performer(String name, String descriptionEng, String descriptionIce, User user) {
     if (name == null || name.equals("")) throw new IllegalArgumentException("name can't be null or empty");
     if (descriptionEng == null || descriptionEng.equals("")) throw new IllegalArgumentException("English description can't be null or empty");

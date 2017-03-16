@@ -18,7 +18,8 @@ public class EventRegistrationDAO extends BaseDAO implements IEventRegistrationD
 
   public List<EventOverviewProjection> getRegisteredEvents(int userId) {
     return executeR((session) -> {
-      return session.createQuery("from EventOverviewProjection userId = :userId",EventOverviewProjection.class)
+      return session.createQuery("from EventOverviewProjection userId = :id",EventOverviewProjection.class)
+                    .setParameter("id",userId)
                     .getResultList();
     });
   }
