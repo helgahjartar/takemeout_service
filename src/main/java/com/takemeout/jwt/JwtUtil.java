@@ -5,13 +5,13 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-import com.takemeout.user.projections.UserProjection;
 import com.takemeout.user.entities.User;
 
+@Component("JwtUtil")
 public class JwtUtil {
 
-    //@Value("${jwt.secret}")
     private static final String secret = "secret";
 
     /**
@@ -21,21 +21,16 @@ public class JwtUtil {
      * @param token the JWT token to parse
      * @return the User object extracted from specified token or null if a token is invalid.
      */
-    public static User parseToken(String token) throws JwtException {
+    public int parseToken(String token) throws JwtException {
         try {
             Claims body = Jwts.parser()
                     .setSigningKey(secret)
                     .parseClaimsJws(token)
                     .getBody();
 
-            User u = new User();
-            u.setUserName(body.getSubject());
-            u.setId(Integer.parseInt((String) body.get("userId")));
-
-            return u;
-
+            return Integer.parseInt((String) body.get("userId"));
         } catch (ClassCastException e) {
-            return null;
+            return -1;
         }
     }
 
@@ -46,7 +41,7 @@ public class JwtUtil {
      * @param u the user for which the token will be generated
      * @return the JWT token
      */
-    public static String generateToken(User u) {
+    public String generateToken(User u) {
         Claims claims = Jwts.claims().setSubject(u.getUserName());
         claims.put("userId", u.getId() + "");
 
