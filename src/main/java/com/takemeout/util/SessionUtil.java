@@ -2,36 +2,31 @@ package com.takemeout.util;
 
 import java.io.File;
 import java.io.InputStream;
-
 import org.hibernate.SessionFactory;
+import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class SessionUtil {
   private static SessionFactory sessionFactory = null;
 
-  private static SessionFactory buildSessionFactory() {
+  public static void buildSessionFactory() {
     try {
+      if (sessionFactory != null) return;
       File file = new File("/etc/takemeout/hibernate.cfg.xml");
-      Configuration config = new Configuration();
-      config.configure(file);
-      ServiceRegistryBuilder serviceBuilder = new ServiceRegistryBuilder();
-      serviceBuilder.applySettings(config.getProperties());
-      ServiceRegistry serviceRegistry = serviceBuilder.buildServiceRegistry();
-      SessionFactory factory = config.buildSessionFactory(serviceRegistry);
-
-      return factory;
+      ServiceRegistry registry  = new StandardServiceRegistryBuilder()
+                                        .configure(file)
+                                        .build();
+      sessionFactory = new Configuration().buildSessionFactory(registry);
     } catch (Throwable ex) {
-        System.err.println("Error initializing SessionFactory creation. " + ex);
+        System.err.println("Error initializing SessionFactory creation.\n" + ex);
         throw new ExceptionInInitializerError(ex);
     }
   }
 
-  public static SessionFactory getSessionFactory() {
-    if (sessionFactory == null) {
-      sessionFactory = buildSessionFactory();
-    }
-    return sessionFactory;
+  public static Session getSession() {
+    if (sessionFactory == null) buildSessionFactory();
+    return sessionFactory.openSession();
   }
 }
