@@ -14,7 +14,7 @@ public class SessionUtil {
   public static void buildSessionFactory() {
     try {
       if (sessionFactory != null) return;
-      File file = new File("/etc/takemeout/hibernate.cfg.xml");
+      File file = new File("hibernate.cfg.xml");
       ServiceRegistry registry  = new StandardServiceRegistryBuilder()
                                         .configure(file)
                                         .build();

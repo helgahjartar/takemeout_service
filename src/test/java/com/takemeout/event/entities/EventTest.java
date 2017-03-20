@@ -3,7 +3,8 @@ package com.takemeout.test.event.entities;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import com.takemeout.event.entities.Event;
+import com.takemeout.event.queryservice.IEventQueryDAO;
+import com.takemeout.event.queryservice.EventQueryDAO;
 
 public class EventTest {
 
