@@ -24,8 +24,8 @@ public class EventRegistrationDAO extends BaseDAO implements IEventRegistrationD
     });
   }
 
-  public void registerEvent(RegisterEventRequest req, int userId) {
-    execute((session) -> {
+  public int registerEvent(RegisterEventRequest req, int userId) {
+    return executeR((session) -> {
       User user = session.get(User.class, userId);
       TypeItem type = session.get(TypeItem.class, req.getTypeId());
       Location location = session.get(Location.class, req.getLocationId());
@@ -35,23 +35,26 @@ public class EventRegistrationDAO extends BaseDAO implements IEventRegistrationD
       Event newEvent = new Event( req.getName(), req.getDescriptionEng(), req.getDescriptionIce()
                                 , req.getTime(), user, type, location, performers);
       session.save(newEvent);
+      return newEvent.getId();
     });
   }
 
-  public void registerLocation(RegisterLocationRequest req, int userId) {
-    execute((session) -> {
+  public int registerLocation(RegisterLocationRequest req, int userId) {
+    return executeR((session) -> {
       User user = session.get(User.class, userId);
       Location newLocation = new Location(req.getName(), req.getAddress(), req.getAccess(), user);
       session.save(newLocation);
+      return newLocation.getId();
     });
   }
 
-  public void registerPerformer(RegisterPerformerRequest req, int userId) {
-    execute((session) -> {
+  public int registerPerformer(RegisterPerformerRequest req, int userId) {
+    return executeR((session) -> {
       User user = session.get(User.class, userId);
       Performer newPerformer = new Performer( req.getName(), req.getDescriptionEng()
                                             , req.getDescriptionIce(), user);
       session.save(newPerformer);
+      return newPerformer.getId();
     });
   }
 }

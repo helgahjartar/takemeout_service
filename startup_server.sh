@@ -2,8 +2,6 @@
 
 echo "Starting up server side of the app.."
 
-cd registered_event_service
-
 gradle wrap
 
 ./gradlew build
