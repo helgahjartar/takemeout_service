@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IEventRegistrationDAO {
   List<EventOverviewProjection> getRegisteredEvents(int userId);
-  void registerEvent(RegisterEventRequest req, int userId);
-  void registerLocation(RegisterLocationRequest req, int userId);
-  void registerPerformer(RegisterPerformerRequest req, int userId);
+  int registerEvent(RegisterEventRequest req, int userId);
+  int registerLocation(RegisterLocationRequest req, int userId);
+  int registerPerformer(RegisterPerformerRequest req, int userId);
 }
